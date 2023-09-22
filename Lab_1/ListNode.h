@@ -1,10 +1,9 @@
 template<typename T>
 class ListNode
 {
-private:
+public:
 	T data;
 	ListNode<T>* next;
-public:
 	ListNode(T data, ListNode<T>* next) {
 		this->data = data;
 		this->next = next;

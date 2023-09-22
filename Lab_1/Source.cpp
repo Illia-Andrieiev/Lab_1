@@ -3,7 +3,7 @@
 using namespace std;
 
 int main() {
-	ArrayList<int> *ar = new ArrayList<int>();
+	List<int> *ar = new ArrayList<int>();
 	ar->pushBack(2);
 	ar->pushBack(4);
 	ar->pushBack(6);
@@ -11,6 +11,8 @@ int main() {
 	ar->print();
 	cout << ar->size() << endl;
 	ar->pushIndex(3, 4);
+	int res = ar->removeIndex(2);
+	cout << ar->size() << endl;
 	ar->print();
 	system("pause");
 	return 0;

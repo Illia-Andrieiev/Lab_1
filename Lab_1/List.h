@@ -3,7 +3,7 @@ template<typename T>
 class List abstract
 {
 private:
-	int elementEmount;
+	int elementAmount;
 public:
 	virtual bool isEmpty() abstract;
 	virtual bool contains(T element) abstract;
@@ -16,7 +16,8 @@ public:
 	virtual void clear() abstract;
 	virtual void set(T element, int index) abstract;
 	virtual void print() abstract;
-	virtual T remove(int index) abstract;
+	virtual T removeIndex(int index) abstract;
+	virtual T removeElem(T element) abstract;
 	virtual T get(int index) abstract;
 	virtual List<T>* clone(List<T>* other) abstract;
 
