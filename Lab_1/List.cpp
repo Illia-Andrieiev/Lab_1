@@ -12,7 +12,7 @@ public:
 	int size() abstract;
 	void pushBack(T element) abstract;
 	void pushIndex(T element, int index) abstract;
-	void addAll(T* arr) abstract;
+	void addAll(T* arr, int size) abstract;
 	void addAll(List<T>* other) abstract;
 	void clear() abstract;
 	void remove(T element) abstract;
