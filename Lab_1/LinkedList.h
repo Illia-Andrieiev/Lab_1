@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 #include "List.h"
 #include "ListNode.h"
 template<typename T>
@@ -26,6 +27,13 @@ public:
 	// Destructor
 	~LinkedList() {
 		clear();
+	}
+	// getters
+	ListNode<T>* getHead() {
+		return head;
+	}
+	ListNode<T>* getTail() {
+		return tail;
 	}
 	// Return first index of element. -1 if do not contain 
 	int indexOf(T element) {
@@ -84,10 +92,44 @@ public:
 		}
 		++elementAmount;
 	};
+	// Add array of elements in the end of list
+	void addAll(T* arr, int size) {
+		for (int i = 0; i < size; i++) {
+			pushBack(arr[i]);
+		}
+	};
+	// Add other List of elements in the end of This list
+	void addAll(List<T>* other) {
+		for (int i = 0; i < other->size(); i++) {
+			pushBack(other->get(i));
+		}
+	};
+	// Set new value at index
+	void set(T element, int index) {
+		if (index < 0 || index >= elementAmount)
+			return;
+		ListNode<T>* curr = head;
+		for (int i = 0; i < index; i++) {
+			curr = curr->next;
+		}
+		curr->data = element;
+	};
+	// Print LinkedList in console
+	void print() {
+		ListNode<T>* curr = head;
+		while (curr != nullptr) {
+			std::cout << curr->data << "\t";
+		}
+	};
 	// Delete Element from List by index
 	T removeIndex(int index) {
 		if (index < 0 || index >= elementAmount)
 			return 0;
+		if (index == 0) {
+			ListNode<T>* res = head;
+			head = head->next;
+			return res;
+		}
 		ListNode<T>* res = head->next;
 		ListNode<T>* prev = head;
 		for (int i = 1; i < index; i++) {
@@ -96,9 +138,22 @@ public:
 		}
 		prev->next = res->next->next;
 		res->next = nullptr;
+		--elementAmount;
 		return res;
 	}
-
+	T removeElem(T element) {
+		return removeIndex(indexOf(element));
+	}
+	// Return element by index
+	T get(int index) {
+		if (index < 0 || index >= elementAmount)
+			return 0;
+		ListNode<T>* curr = head;
+		for (int i = 0; i < index; i++) {
+			curr = curr->next;
+		}
+		return curr->data;
+	}
 	// Clear List
 	void clear() {
 		elementAmount = 0;
@@ -113,5 +168,11 @@ public:
 			curr = head->next;
 		}
 	}
+	// Return copy of this list
+	List<T>* clone() {
+		List<T>* res = new LinkedList<T>();
+		res->addAll(this);
+		return res;
+	};
 };
 

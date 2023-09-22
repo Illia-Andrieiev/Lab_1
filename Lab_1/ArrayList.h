@@ -167,9 +167,9 @@ public:
 		return array[index];
 	}
 	// Return copy of this list
-	List<T>* clone(List<T>* other) {
+	List<T>* clone() {
 		List<T>* res = new ArrayList<T>();
-		res->addAll(other);
+		res->addAll(this);
 		return res;
 	};
 };

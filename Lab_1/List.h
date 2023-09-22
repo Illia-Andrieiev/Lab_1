@@ -19,7 +19,7 @@ public:
 	virtual T removeIndex(int index) abstract;
 	virtual T removeElem(T element) abstract;
 	virtual T get(int index) abstract;
-	virtual List<T>* clone(List<T>* other) abstract;
+	virtual List<T>* clone() abstract;
 
 };
 
