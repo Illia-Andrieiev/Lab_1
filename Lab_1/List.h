@@ -3,21 +3,22 @@ template<typename T>
 class List abstract
 {
 private:
-	int size;
+	int elementEmount;
 public:
-	bool isEmpty() abstract;
-	bool contains(T element) abstract;
-	int indexOf(T element) abstract;
-	int size() abstract;
-	void pushBack(T element) abstract;
-	void pushIndex(T element, int index) abstract;
-	void addAll(T* arr, int size) abstract;
-	void addAll(List<T> *other) abstract;
-	void clear() abstract;
-	void remove(T element) abstract;
-	void set(T element, int index) abstract;
-	T remove(int index) abstract;
-	List<T>* clone() abstract;
+	virtual bool isEmpty() abstract;
+	virtual bool contains(T element) abstract;
+	virtual int indexOf(T element) abstract;
+	virtual int size() abstract;
+	virtual void pushBack(T element) abstract;
+	virtual void pushIndex(T element, int index) abstract;
+	virtual void addAll(T* arr, int size) abstract;
+	virtual void addAll(List<T> *other) abstract;
+	virtual void clear() abstract;
+	virtual void set(T element, int index) abstract;
+	virtual void print() abstract;
+	virtual T remove(int index) abstract;
+	virtual T get(int index) abstract;
+	virtual List<T>* clone(List<T>* other) abstract;
 
 };
 
