@@ -1,6 +1,6 @@
-#include<iostream>
+//#include<iostream>
 #include "Graf.h"
-#include "ArrayList.cpp"
+#include "ArrayList.h"
 //******************************************************************
 /*
 							PRIVATE METHODS
@@ -148,4 +148,34 @@ void Graf<T>::removeEdges(int* edges, int size) {
 template<typename T>
 T Graf<T>::getVertex(int nomer){
 	return vertexes->get(nomer);
+}
+// Print Graf
+template<typename T>
+void Graf<T>::print() {
+	std::cout << "vertexes:" << std::endl;
+	vertexes->print();
+	std::cout << std::endl << "edges:" << std::endl;
+	edges->print();
+}
+// Is contain graf element
+template<typename T>
+bool Graf<T>::contains(T element) {
+	return vertexes->contains(element);
+}
+// Is contain graf edge
+template<typename T>
+bool Graf<T>::containsEdge(int* edge){
+	int curr = 0;
+	try {
+		while (curr < edges->size()) { // Delete edges from graf
+			if ((edges->get(curr) == edge[0] && edges->get(curr + 1) == edge[1]) ||
+				(edges->get(curr) == edge[1] && edges->get(curr + 1) == edge[0]))
+				return true;
+			else
+				curr += 2;
+		}
+	}catch (std::out_of_range e) {
+		std::cout << "Array of edge vertexes must have 2 int vales!";
+	}
+	return false;
 }

@@ -30,5 +30,8 @@ public:
 	int nomerOfVertex(T element);
 	T getVertex(int nomer);
 	void removeEdges(int* edges, int size);
+	bool contains(T element);
+	bool containsEdge(int* element);
+	void print();
 };
 

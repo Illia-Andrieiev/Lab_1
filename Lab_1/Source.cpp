@@ -1,7 +1,5 @@
-#include<iostream>
-#include "LinkedList.cpp"
 #include "Graf.cpp"
-
+#include "ArrayList.cpp"
 using namespace std;
 int main() {
 	List<int> *ar = new ArrayList<int>();
@@ -24,6 +22,7 @@ int main() {
 	Graf<int>* graf = new Graf<int>(ar);
 	graf->add(7);
 	cout << endl << graf->getVertex(4) << endl;
+	graf->print();
 	system("pause");
 	return 0;
 }
