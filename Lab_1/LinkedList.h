@@ -28,6 +28,9 @@ public:
 	~LinkedList() {
 		clear();
 	}
+	T operator () (int index) {
+		return get(index);
+	}
 	// getters
 	ListNode<T>* getHead() {
 		return head;

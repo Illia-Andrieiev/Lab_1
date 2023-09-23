@@ -56,6 +56,9 @@ public:
 	~ArrayList() {
 		delete[] array;
 	};
+	T operator ()(int index) {
+		return get(index);
+	}
 	// Return true, if ArrayList is empty
 	bool isEmpty() {
 		if (elementAmount == 0)
