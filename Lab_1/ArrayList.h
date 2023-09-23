@@ -1,6 +1,8 @@
 #pragma once
 #include <iostream>
 #include "List.h"
+#include <xkeycheck.h>
+
 template<typename T>
 class ArrayList : public List<T>
 {
@@ -56,9 +58,6 @@ public:
 	~ArrayList() {
 		delete[] array;
 	};
-	T operator ()(int index) {
-		return get(index);
-	}
 	// Return true, if ArrayList is empty
 	bool isEmpty() {
 		if (elementAmount == 0)

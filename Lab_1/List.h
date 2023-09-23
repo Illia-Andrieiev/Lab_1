@@ -20,6 +20,5 @@ public:
 	virtual T removeElem(T element) abstract;
 	virtual T get(int index) abstract;
 	virtual List<T>* clone() abstract;
-
 };
 

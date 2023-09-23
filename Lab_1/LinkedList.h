@@ -28,9 +28,6 @@ public:
 	~LinkedList() {
 		clear();
 	}
-	T operator () (int index) {
-		return get(index);
-	}
 	// getters
 	ListNode<T>* getHead() {
 		return head;
@@ -69,7 +66,7 @@ public:
 			tail = head;
 		}
 		else {
-			ListNode<T> newElem = new ListNode<T>(element, nullptr);
+			ListNode<T>* newElem = new ListNode<T>(element, nullptr);
 			tail->next = newElem;
 			tail = tail->next;
 		}
@@ -81,8 +78,9 @@ public:
 			return;
 		ListNode<T>* curr = head;
 		if (index == 0) {
-			ListNode<T> newElem = new ListNode<T>(element, head);
+			ListNode<T>* newElem = new ListNode<T>(element, head);
 			head = newElem;
+			++elementAmount;
 		} else if (index == elementAmount) {
 			pushBack(element);
 		}
@@ -90,10 +88,11 @@ public:
 			for (int i = 1; i < index; i++) {
 				curr = curr->next;
 			}
-			ListNode<T> newElem = new ListNode<T>(element, curr->next);
-			curr->next = element;
+			ListNode<T>* newElem = new ListNode<T>(element, curr->next);
+			curr->next = newElem;
+			++elementAmount;
 		}
-		++elementAmount;
+		
 	};
 	// Add array of elements in the end of list
 	void addAll(T* arr, int size) {
@@ -117,13 +116,6 @@ public:
 		}
 		curr->data = element;
 	};
-	// Print LinkedList in console
-	void print() {
-		ListNode<T>* curr = head;
-		while (curr != nullptr) {
-			std::cout << curr->data << "\t";
-		}
-	};
 	// Delete Element from List by index
 	T removeIndex(int index) {
 		if (index < 0 || index >= elementAmount)
@@ -131,7 +123,7 @@ public:
 		if (index == 0) {
 			ListNode<T>* res = head;
 			head = head->next;
-			return res;
+			return res->data;
 		}
 		ListNode<T>* res = head->next;
 		ListNode<T>* prev = head;
@@ -139,10 +131,10 @@ public:
 			res = res->next;
 			prev = prev->next;
 		}
-		prev->next = res->next->next;
+		prev->next = res->next;
 		res->next = nullptr;
 		--elementAmount;
-		return res;
+		return res->data;;
 	}
 	T removeElem(T element) {
 		return removeIndex(indexOf(element));
@@ -177,5 +169,13 @@ public:
 		res->addAll(this);
 		return res;
 	};
+	// Print LinkedList in console
+	void print() {
+		ListNode<T>* curr = head;
+		while (curr != nullptr) {
+			std::cout << curr->data << "\t";
+			curr = curr->next;
+		}
+	}
 };
 
