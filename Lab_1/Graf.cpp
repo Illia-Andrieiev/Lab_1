@@ -3,11 +3,12 @@
 #include "ArrayList.cpp"
 //******************************************************************
 /*
-							SUPPORT FUNCTIONS
+							PRIVATE METHODS
 */
 //******************************************************************
 // Create matrix NxN with list
-bool** createMatrix(int n, int* edges, int sizeE) {
+template<typename T>
+bool** Graf<T>::createMatrix(int n, int* edges, int sizeE) {
 	bool** res = new bool* [n];
 	for (int i = 0; i < n; i++)
 		res[i] = new bool[n];
@@ -16,11 +17,6 @@ bool** createMatrix(int n, int* edges, int sizeE) {
 	}
 	return res;
 } 
-//******************************************************************
-/*
-							PRIVATE METHODS
-*/
-//******************************************************************
 // Available edge nomer
 template<typename T>
 bool Graf<T>::isCorrectEdgeNomer(int* edges, int size) {
@@ -73,11 +69,25 @@ Graf<T>::Graf(T* vertex, int size) {
 	edges = new ArrayList<int>();
 }
 template<typename T>
+Graf<T>::Graf(List<T>* vertex) {
+	vertexes = new ArrayList<T>();
+	vertexes->addAll(vertex);
+	edges = new ArrayList<int>();
+};
+template<typename T>
 Graf<T>::Graf(T* vertex, int sizeV, int* edges, int sizeE) {
 	if (sizeE % 2 != 0) // One edge must given by two vertex nomers 
 		--sizeE;
 	vertexes = new ArrayList<T>(vertex, sizeV);
 	this.edges = new ArrayList<int>(edges,sizeE);
+}
+template<typename T>
+Graf<T>::Graf(List<T>* vertex, int* edges, int sizeE) {
+	if (sizeE % 2 != 0) // One edge must given by two vertex nomers 
+		--sizeE;
+	vertexes = new ArrayList<T>();
+	vertexes->addAll(vertex);
+	this.edges = new ArrayList<int>(edges, sizeE);
 }
 // Destructor
 template<typename T>
@@ -87,7 +97,7 @@ Graf<T>::~Graf() {
 };
 // Add one Vertex
 template<typename T>
-void Graf<T>::addVertex(T element) {
+void Graf<T>::add(T element) {
 	vertexes->pushBack(element);
 }
 // Add List of Vertexes

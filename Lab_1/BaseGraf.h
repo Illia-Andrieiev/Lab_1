@@ -3,7 +3,6 @@ template<typename T>
 class BaseGraf abstract
 {
 private:
-	int elementAmount;
 public:
 	virtual void add(T element) = 0;
 	virtual T removeIndex(int nomer) = 0;

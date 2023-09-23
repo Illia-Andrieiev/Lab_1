@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClCompile Include="ArrayList.cpp" />
     <ClCompile Include="BaseGraf.cpp" />
+    <ClCompile Include="BaseTree.cpp" />
     <ClCompile Include="Graf.cpp" />
     <ClCompile Include="LinkedList.cpp" />
     <ClCompile Include="List.cpp" />
@@ -138,6 +139,7 @@
   <ItemGroup>
     <ClInclude Include="ArrayList.h" />
     <ClInclude Include="BaseGraf.h" />
+    <ClInclude Include="BaseTree.h" />
     <ClInclude Include="Graf.h" />
     <ClInclude Include="LinkedList.h" />
     <ClInclude Include="List.h" />

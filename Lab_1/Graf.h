@@ -10,15 +10,18 @@ class Graf : public BaseGraf<T>
 private:
 	List<T>* vertexes;
 	List<int>* edges;// edges, that stored as pairs of vertex nomers
+	bool** createMatrix(int n, int* edges, int sizeE);
 	bool isCorrectEdgeNomer(int* edges, int size);
 	void deleteAllVertexesEdges(int nomer);
 	void deleteOneEdge(int* edge);
 public:
 	Graf();
 	Graf(T* vertex, int size);
+	Graf(List<T>* vertex);
 	Graf(T* vertex,int sizeV, int* edges, int sizeE);
+	Graf(List<T>* vertex, int* edges, int sizeE);
 	~Graf();
-	void addVertex(T element);
+	void add(T element);
 	void addVertexes(List<T>* element);
 	void addVertexes(T* element, int size);
 	void addEdges(int* element, int size);
