@@ -6,11 +6,12 @@ class Tree :
     public BaseTree<T>
 {
 private:
+    int n;
     TreeNode<T>* root;
     int elementAmount;
 public:
-    Tree();
-    Tree(List<T>* list);
+    Tree(int n);
+    Tree(List<T>* list, int n);
     void add(T element);
     void addAll(List<T>* list);
     void removeElem(T element);
