@@ -1,5 +1,10 @@
 #include "ArrayList.h"
 #include "List.h"
+//******************************************************************
+/*
+							PRIVATE METHODS
+*/
+//******************************************************************
 // Increases array size on 20
 template<typename T>
 void ArrayList<T>::extendArray() {
@@ -34,14 +39,11 @@ void ArrayList<T>::reduceArray() {
 	delete[] array;
 	array = newArray;
 }
-//*******************************************************************************
-// Return true, if ArrayList is empty
-template<typename T>
-bool ArrayList<T>::isEmpty() {
-	if (elementAmount == 0)
-		return true;
-	return false;
-};
+//******************************************************************
+/*
+							PUBLIC METHODS
+*/
+//******************************************************************
 // Constructors
 template<typename T>
 ArrayList<T>::ArrayList() {
@@ -51,6 +53,8 @@ ArrayList<T>::ArrayList() {
 };
 template<typename T>
 ArrayList<T>::ArrayList(T* elements, int size) {
+	if (size < 0)
+		size -= size * 2;
 	this->elementAmount = size;
 	arraySize = ((int)size / 20 + 1) * 20;
 	array = new T[arraySize];
@@ -60,6 +64,13 @@ ArrayList<T>::ArrayList(T* elements, int size) {
 template<typename T>
 ArrayList<T>::~ArrayList() {
 	delete[] array;
+};
+// Return true, if ArrayList is empty
+template<typename T>
+bool ArrayList<T>::isEmpty() {
+	if (elementAmount == 0)
+		return true;
+	return false;
 };
 // Return amount of cointained elements
 template<typename T>
@@ -171,7 +182,7 @@ template<typename T>
 T ArrayList<T>::removeElem(T element) {
 	return removeIndex(indexOf(element));
 }
-// Return element by index
+// Return element by index. 0 if index out of borders
 template<typename T>
 T ArrayList<T>::get(int index) {
 	if (index < 0 || index >= elementAmount)

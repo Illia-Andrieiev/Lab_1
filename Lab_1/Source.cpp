@@ -3,7 +3,6 @@
 #include "ArrayList.cpp"
 #include "LinkedList.cpp"
 using namespace std;
-
 int main() {
 	List<int> *ar = new LinkedList<int>();
 	ar->pushBack(2);
