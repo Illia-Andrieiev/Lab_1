@@ -1,10 +1,11 @@
 #include<iostream>
+#include"List.cpp"
 #include "ArrayList.cpp"
 #include "LinkedList.cpp"
 using namespace std;
 
 int main() {
-	List<int> *ar = new ArrayList<int>();
+	List<int> *ar = new LinkedList<int>();
 	ar->pushBack(2);
 	ar->pushBack(4);
 	ar->pushBack(6);
