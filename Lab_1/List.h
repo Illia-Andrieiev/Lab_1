@@ -3,7 +3,7 @@ template<typename T>
 class List abstract
 {
 private:
-	int elementAmount;
+	int elementAmount = 0;
 public:
 	virtual bool isEmpty() abstract;
 	virtual bool contains(T element) abstract;
