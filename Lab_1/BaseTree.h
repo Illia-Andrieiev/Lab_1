@@ -5,7 +5,7 @@ template<typename T>
 class BaseTree : public BaseGraf<T>
 {
 private:
-	int elementAmount;
+	int elementAmount = 0;
 public:
 	virtual void addAll(List<T>* list) = 0;
 	virtual void add(T element) = 0;

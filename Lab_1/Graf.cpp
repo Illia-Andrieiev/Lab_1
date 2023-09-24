@@ -1,4 +1,4 @@
-//#include<iostream>
+#pragma once
 #include "Graf.h"
 #include "ArrayList.h"
 //******************************************************************

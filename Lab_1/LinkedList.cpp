@@ -1,3 +1,4 @@
+#pragma once
 #include "LinkedList.h"
 // Constructors
 template<typename T>
@@ -128,6 +129,7 @@ T LinkedList<T>::removeIndex(int index) {
 	if (index == 0) {
 		ListNode<T>* res = head;
 		head = head->next;
+		--elementAmount;
 		return res->data;
 	}
 	ListNode<T>* res = head->next;

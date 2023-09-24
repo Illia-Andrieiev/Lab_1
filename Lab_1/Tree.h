@@ -1,6 +1,7 @@
 #pragma once
 #include"TreeNode.h"
 #include "BaseTree.h"
+#include"List.h"
 template<typename T>
 class Tree :
     public BaseTree<T>

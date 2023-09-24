@@ -1,4 +1,5 @@
 #include "Graf.cpp"
+#include "Tree.cpp"
 #include "ArrayList.cpp"
 using namespace std;
 int main() {
@@ -23,6 +24,8 @@ int main() {
 	graf->add(7);
 	cout << endl << graf->getVertex(4) << endl;
 	graf->print();
+	Tree<int>* tree = new Tree<int>(ar, 2);
+	tree->print();
 	system("pause");
 	return 0;
 }

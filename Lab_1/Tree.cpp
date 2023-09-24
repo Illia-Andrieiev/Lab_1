@@ -1,5 +1,8 @@
+#pragma once
 #include "Tree.h"
-#include"LinkedList.h"
+#include"TreeNode.cpp"
+#include"LinkedList.cpp"
+#include"List.h"
 //******************************************************************
 /*
 							PUBLIC METHODS
@@ -27,23 +30,23 @@ void Tree<T>::add(T element) {
 		++elementAmount;
 		return;
 	}
-	LinkedList<TreeNode<T>*> queue = new LinkedList<TreeNode<T>*>();
+	LinkedList<TreeNode<T>*>* queue = new LinkedList<TreeNode<T>*>();
 	queue->pushBack(root);
 	while (true) {
-		if (queue->getHead()->next->size() =< n) {
-			queue->getHead()->next->pushBack(new TreeNode<T>(element));
+		if (queue->getHead()->data->next->size() <= n) {
+			queue->getHead()->data->next->pushBack(new TreeNode<T>(element));
 			++elementAmount;
 			break;
 		}
-		queue->addAll(queue->getHead()->next);
-		queue->remove(0);
+		queue->addAll(queue->getHead()->data->next);
+		queue->removeIndex(0);
 	}
 	queue->clear(); //???????????????????????? Maybe delete tree????????????????????
 };
 // Add all list elements to Tree by tier
 template<typename T>
 void Tree<T>::addAll(List<T>* list) {
-	for (int i = 0; i < other->size(); i++) {
+	for (int i = 0; i < list->size(); i++) {
 		add(list->get(i));
 	}
 };
@@ -52,11 +55,11 @@ template<typename T>
 void Tree<T>::removeElem(T element) {
 	if (root == nullptr)
 		return;
-	LinkedList<TreeNode<T>*> queue = new LinkedList<TreeNode<T>*>();
+	LinkedList<TreeNode<T>*>* queue = new LinkedList<TreeNode<T>*>();
 	queue->pushBack(root);
-	while (!queue->isEmpty) {
-		if (queue->getHead()->data == element) {
-			TreeNode<T>* forDelete = queue->getHead();
+	while (!queue->isEmpty()) {
+		if (queue->getHead()->data->data == element) {
+			TreeNode<T>* forDelete = queue->getHead()->data;
 			TreeNode<T>* temp = forDelete;
 			while (temp->next->size() != 0) {
 				temp = temp->next->get(0);
@@ -65,8 +68,8 @@ void Tree<T>::removeElem(T element) {
 			delete temp;
 			break;
 		}
-		queue->addAll(queue->getHead()->next);
-		queue->remove(0);
+		queue->addAll(queue->getHead()->data->next);
+		queue->removeIndex(0);
 	}
 	queue->clear(); //???????????????????????? Maybe delete tree????????????????????
 };
@@ -75,28 +78,29 @@ template<typename T>
 bool Tree<T>::contains(T element) {
 	if (root == nullptr)
 		return false;
-	LinkedList<TreeNode<T>*> queue = new LinkedList<TreeNode<T>*>();
+	LinkedList<TreeNode<T>*>* queue = new LinkedList<TreeNode<T>*>();
 	queue->pushBack(root);
-	while (!queue->isEmpty) {
-		if (queue->getHead()->data == element) {
+	while (!queue->isEmpty()) {
+		if (queue->getHead()->data->data == element) {
 			return true;
 		}
-		queue->addAll(queue->getHead()->next);
-		queue->remove(0);
+		queue->addAll(queue->getHead()->data->next);
+		queue->removeIndex(0);
 	}
 	queue->clear(); //???????????????????????? Maybe delete tree????????????????????
+	return false;
 };
 // Print tree by tier
 template<typename T>
 void Tree<T>::print() {
 	if (root == nullptr)
 		return;
-	LinkedList<TreeNode<T>*> queue = new LinkedList<TreeNode<T>*>();
+	LinkedList<TreeNode<T>*>* queue = new LinkedList<TreeNode<T>*>();
 	queue->pushBack(root);
-	while (!queue->isEmpty) {
-		std::cout << queue->getHead()->data << " " << std::endl;
-		queue->addAll(queue->getHead()->next);
-		queue->remove(0);
+	while (!queue->isEmpty()) {
+		std::cout << queue->getHead()->data->data << " " << std::endl;
+		queue->addAll(queue->getHead()->data->next);
+		queue->removeIndex(0);
 	}
 	queue->clear();//???????????????????????? Maybe delete tree????????????????????
 };
