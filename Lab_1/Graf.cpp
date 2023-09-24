@@ -17,6 +17,46 @@ bool** Graf<T>::createMatrix(int n, int* edges, int sizeE) {
 	}
 	return res;
 } 
+// Find all connected edges for vertex 
+template<typename T>
+List<int>* Graf<T>::findAllVertexesEdges(int nomer) {
+	List<int>* res = new List<int>();
+	int curr = 0;
+	while (curr < edges->size()) { 
+		if (edges->get(curr) == nomer || edges->get(curr + 1) == nomer) {
+			res->pushBack(edges->get(curr));
+			res->pushBack(edges->get(curr+1));
+		}
+		else
+			curr += 2;
+	}
+}
+// Check if List contain edge
+template<typename T>
+bool Graf<T>::isContainEdge(List<int>* edges, int* edge){
+	int curr = 0;
+	while (curr < edges->size()) {
+		if ((edges->get(curr) == edge[0] && edges->get(curr + 1) == edge[1]) ||
+			(edges->get(curr) == edge[1] && edges->get(curr + 1) == edge[0]))
+			return true;
+		else
+			curr += 2;
+	}
+	return false;
+}
+// Add in first list unique edges from second list
+template<typename T>
+void Graf<T>::AddUniqueEdges(List<int>* old, List<int>* newEdges) {
+	for (int i = 0; i < newEdges->size(); i += 2) {
+		int* edge = new int[2];
+		edge[0] = newEdges->get(i);
+		edge[1] = newEdges->get(i + 1);
+		if (!isContainEdge(old, edge)) {
+			old->addAll(edge, 2);
+		}
+		delete[] edge;
+	}
+}
 // Available edge nomer
 template<typename T>
 bool Graf<T>::isCorrectEdgeNomer(int* edges, int size) {
@@ -114,7 +154,10 @@ void Graf<T>::addVertexes(T* arr, int size) {
 template<typename T>
 void Graf<T>::addEdges(int* arr, int size) {
 	if (isCorrectEdgeNomer(arr, size))
-		edges->addAll(arr, size);
+		for (int i = 0; i < size; i += 2) {
+			if (!containsEdge(&arr[i]))
+				edges->addAll(&arr[i], 2);
+		}
 	else
 		std::cout << " edge nomer more then maximum vertex nomer";
 }
@@ -167,7 +210,7 @@ template<typename T>
 bool Graf<T>::containsEdge(int* edge){
 	int curr = 0;
 	try {
-		while (curr < edges->size()) { // Delete edges from graf
+		while (curr < edges->size()) {
 			if ((edges->get(curr) == edge[0] && edges->get(curr + 1) == edge[1]) ||
 				(edges->get(curr) == edge[1] && edges->get(curr + 1) == edge[0]))
 				return true;
@@ -179,3 +222,34 @@ bool Graf<T>::containsEdge(int* edge){
 	}
 	return false;
 }
+template<typename T>
+List<Graf<T>>* Graf<T>::findOstTree() {
+	List<Graf<T>>* ostTrees = new List<Graf<T>>();
+	bool* checked = new bool[vertexes->size()];
+	for (int i = 0; i < vertexes->size(); i++) {
+		if (!checked[i]) {
+			ostTrees->pushBack(findOstTreeForVertex(i, checked))
+		}
+	}
+	delete[] checked;
+	return ostTrees;
+}
+template<typename T>
+Graf<T> Graf<T>::findOstTreeForVertex(int nomer, bool* checked) {
+	Graf<T>* ostTree = new Graf<T>();
+	List<int>* queue = new ArrayList<int>();
+	queue->pushBack(nomer);
+	while (!queue->isEmpty()) {
+		checked[queue->get(0)] = true;
+		List<int>* vertexesEdges = findAllVertexesEdges(queue->get(0));
+		AddUniqueEdges(ostTree->edges, vertexesEdges);
+		for (int i = 0; i < vertexesEdges->size(); i++) {
+			if (!checked[vertexesEdges->get(i)]) {
+				checked[queue->get(0)] = true;
+				queue->pushBack(vertexesEdges->get(i));
+			}
+		}
+		queue->removeIndex(0);
+	}
+	return ostTree;
+};

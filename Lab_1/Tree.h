@@ -18,5 +18,7 @@ public:
     void removeElem(T element);
     bool contains(T element);
     void print();
+    int size();
+    void clear();
 };
 

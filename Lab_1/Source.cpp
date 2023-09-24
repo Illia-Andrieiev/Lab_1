@@ -26,6 +26,10 @@ int main() {
 	graf->print();
 	Tree<int>* tree = new Tree<int>(ar, 2);
 	tree->print();
+	cout << endl;
+
+	ar->print();
+
 	system("pause");
 	return 0;
 }
