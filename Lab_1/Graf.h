@@ -19,6 +19,7 @@ private:
 	Graf<T>* findConnectionComponentForVertex(int nomer, bool* checked);
 	bool isConnectedWhileAdd(List<int>* edges, int first, int second);
 	List<int>* adjacentVertexes(List<int>* edges, int nomer);
+	Graf<T>* findOstTreeForGraf(Graf<T>* graf);
 public:
 	Graf();
 	Graf(T* vertex, int size);
@@ -26,6 +27,7 @@ public:
 	Graf(T* vertex,int sizeV, int* edges, int sizeE);
 	Graf(List<T>* vertex, int* edges, int sizeE);
 	~Graf();
+	List<T>* getVertexes();
 	int vertexAmount();
 	int edgesAmount();
 	void add(T element);
@@ -42,5 +44,8 @@ public:
 	bool isConnectedVertex(int first, int second);
 	void print();
 	List<Graf<T>*>* findConnectionComponent();
+	Graf<T>* findOstTree();
+	List<Graf<T>*>* findOstForest();
+
 };
 
