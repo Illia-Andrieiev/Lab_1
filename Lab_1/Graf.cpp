@@ -20,16 +20,16 @@ bool** Graf<T>::createMatrix(int n, int* edges, int sizeE) {
 // Find all connected edges for vertex 
 template<typename T>
 List<int>* Graf<T>::findAllVertexesEdges(int nomer) {
-	List<int>* res = new List<int>();
+	List<int>* res = new ArrayList<int>();
 	int curr = 0;
 	while (curr < edges->size()) { 
 		if (edges->get(curr) == nomer || edges->get(curr + 1) == nomer) {
 			res->pushBack(edges->get(curr));
 			res->pushBack(edges->get(curr+1));
 		}
-		else
-			curr += 2;
+		curr += 2;
 	}
+	return res;
 }
 // Check if List contain edge
 template<typename T>
@@ -61,7 +61,7 @@ void Graf<T>::AddUniqueEdges(List<int>* old, List<int>* newEdges) {
 template<typename T>
 bool Graf<T>::isCorrectEdgeNomer(int* edges, int size) {
 	for (int i = 0; i < size; i++) {
-		if (edges >= vertexes->size())
+		if (edges[i] >= vertexes->size())
 			return false;
 	}
 	return true;
@@ -222,34 +222,41 @@ bool Graf<T>::containsEdge(int* edge){
 	}
 	return false;
 }
+// Find all connection components for graf
 template<typename T>
-List<Graf<T>>* Graf<T>::findOstTree() {
-	List<Graf<T>>* ostTrees = new List<Graf<T>>();
+List<Graf<T>*>* Graf<T>::findConnectionComponent() {
+	List<Graf<T>*>* ConnectionComponents = new ArrayList<Graf<T>*>();
 	bool* checked = new bool[vertexes->size()];
 	for (int i = 0; i < vertexes->size(); i++) {
-		if (!checked[i]) {
-			ostTrees->pushBack(findOstTreeForVertex(i, checked))
+		checked[i] = false;
+	}
+	for (int i = 0; i < vertexes->size(); i++) { // Checking all vertex
+		if (!checked[i]) { // If not connected with previous, find new component
+			ConnectionComponents->pushBack(findConnectionComponentForVertex(i, checked));
 		}
 	}
 	delete[] checked;
-	return ostTrees;
+	return ConnectionComponents;
 }
+// Find one connection component, that include "nomer" vertex
 template<typename T>
-Graf<T> Graf<T>::findOstTreeForVertex(int nomer, bool* checked) {
-	Graf<T>* ostTree = new Graf<T>();
-	List<int>* queue = new ArrayList<int>();
+Graf<T>* Graf<T>::findConnectionComponentForVertex(int nomer, bool* checked) {
+	Graf<T>* connectionComponent = new Graf<T>(); // res
+	List<int>* queue = new ArrayList<int>(); // queue for all connected vertexes
 	queue->pushBack(nomer);
 	while (!queue->isEmpty()) {
-		checked[queue->get(0)] = true;
-		List<int>* vertexesEdges = findAllVertexesEdges(queue->get(0));
-		AddUniqueEdges(ostTree->edges, vertexesEdges);
-		for (int i = 0; i < vertexesEdges->size(); i++) {
+		connectionComponent->add(this->getVertex(queue->get(0))); // Add vertex to component
+		checked[queue->get(0)] = true; // mark as vievd
+		List<int>* vertexesEdges = findAllVertexesEdges(queue->get(0)); // Find all connected edges
+		AddUniqueEdges(connectionComponent->edges, vertexesEdges); // Add unique edges to component
+		for (int i = 0; i < vertexesEdges->size(); i++) { // Check edges for new connected vertexes and add to queue
 			if (!checked[vertexesEdges->get(i)]) {
 				checked[queue->get(0)] = true;
+
 				queue->pushBack(vertexesEdges->get(i));
 			}
 		}
 		queue->removeIndex(0);
 	}
-	return ostTree;
+	return connectionComponent;
 };

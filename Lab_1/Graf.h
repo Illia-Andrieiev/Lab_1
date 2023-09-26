@@ -17,7 +17,7 @@ private:
 	bool isContainEdge(List<int>* edges, int* edge);
 	void AddUniqueEdges(List<int>* old, List<int>* newEdges);
 	List<int>* findAllVertexesEdges(int nomer);
-	Graf<T> findOstTreeForVertex(int nomer, bool* checked);
+	Graf<T>* findConnectionComponentForVertex(int nomer, bool* checked);
 public:
 	Graf();
 	Graf(T* vertex, int size);
@@ -37,6 +37,6 @@ public:
 	bool contains(T element);
 	bool containsEdge(int* element);
 	void print();
-	List<Graf<T>>* findOstTree();
+	List<Graf<T>*>* findConnectionComponent();
 };
 

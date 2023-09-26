@@ -161,8 +161,9 @@ void ArrayList<T>::set(T element, int index) {
 template<typename T>
 void ArrayList<T>::print() {
 	for (int i = 0; i < elementAmount; i++) {
-		std::cout << array[i] << "\t";
+		std::cout << array[i] << "    ";
 	}
+	std::cout << std::endl;
 };
 // Remove element by index. Reduce array if necessary
 template<typename T>

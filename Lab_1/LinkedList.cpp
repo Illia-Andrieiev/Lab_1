@@ -186,7 +186,8 @@ template<typename T>
 void LinkedList<T>::print() {
 	ListNode<T>* curr = head;
 	while (curr != nullptr) {
-		std::cout << curr->data << "\t";
+		std::cout << curr->data << "    ";
 		curr = curr->next;
 	}
+	std::cout << std::endl;
 }
