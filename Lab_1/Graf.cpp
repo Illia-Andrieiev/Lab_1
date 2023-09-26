@@ -6,17 +6,48 @@
 							PRIVATE METHODS
 */
 //******************************************************************
-// Create matrix NxN with list
+// Return true, if those two vertexes are connected in graf with this edges list
 template<typename T>
-bool** Graf<T>::createMatrix(int n, int* edges, int sizeE) {
-	bool** res = new bool* [n];
-	for (int i = 0; i < n; i++)
-		res[i] = new bool[n];
-	if (edges != nullptr) {
-	
+bool Graf<T>::isConnectedWhileAdd(List<int>* edges, int start, int end) {
+	if (start >= 0 && start < vertexes->size() && end >= 0 && end < vertexes->size()) {
+		List<int>* queue = new ArrayList<int>(); // queue for all connected vertexes
+		bool* checked = new bool[vertexes->size()]; //Checked Vertexes
+		for (int i = 0; i < vertexes->size(); i++) {
+			checked[i] = false;
+		}
+		queue->pushBack(start);
+		while (!queue->isEmpty()) {
+			checked[queue->get(0)] = true;
+			List<int>* adjacent = adjacentVertexes(edges, queue->get(0)); 
+			adjacent->print();
+			// Adjecent vertexs
+			if (adjacent->contains(end))
+				return true;
+			for (int i = 0; i < adjacent->size(); i++) {
+				if (!checked[adjacent->get(i)]) {
+					queue->pushBack(adjacent->get(i));
+					checked[adjacent->get(i)] = true;
+				}
+			}
+			queue->removeIndex(0);
+		}
 	}
-	return res;
-} 
+	return false;
+}
+// Find all adjacent vertexes for "nomer" vertex 
+template<typename T>
+List<int>* Graf<T>::adjacentVertexes(List<int>* edges, int nomer) {
+	List<int>* adjacent = new ArrayList<int>();
+	int curr = 0;
+	while (curr < edges->size()) {
+		if (edges->get(curr) == nomer) 
+			adjacent->pushBack(edges->get(curr + 1));		
+		if(edges->get(curr + 1) == nomer)
+			adjacent->pushBack(edges->get(curr));
+		curr += 2;
+	}
+	return adjacent;
+}
 // Find all connected edges for vertex 
 template<typename T>
 List<int>* Graf<T>::findAllVertexesEdges(int nomer) {
@@ -61,7 +92,9 @@ void Graf<T>::AddUniqueEdges(List<int>* old, List<int>* newEdges) {
 template<typename T>
 bool Graf<T>::isCorrectEdgeNomer(int* edges, int size) {
 	for (int i = 0; i < size; i++) {
-		if (edges[i] >= vertexes->size())
+		if (i % 2 == 0 && edges[i] == edges[i+1])
+			return false;
+		if (edges[i] >= vertexes->size() || edges[i] < 0)
 			return false;
 	}
 	return true;
@@ -222,9 +255,16 @@ bool Graf<T>::containsEdge(int* edge){
 	}
 	return false;
 }
+// Return true, if those vertexes are connected
+template<typename T>
+bool  Graf<T>::isConnectedVertex(int first, int second) {
+	return isConnectedWhileAdd(edges, first, second);
+}
 // Find all connection components for graf
 template<typename T>
 List<Graf<T>*>* Graf<T>::findConnectionComponent() {
+	if (vertexes->size() == 0)
+		return nullptr;
 	List<Graf<T>*>* ConnectionComponents = new ArrayList<Graf<T>*>();
 	bool* checked = new bool[vertexes->size()];
 	for (int i = 0; i < vertexes->size(); i++) {
@@ -244,19 +284,28 @@ Graf<T>* Graf<T>::findConnectionComponentForVertex(int nomer, bool* checked) {
 	Graf<T>* connectionComponent = new Graf<T>(); // res
 	List<int>* queue = new ArrayList<int>(); // queue for all connected vertexes
 	queue->pushBack(nomer);
-	while (!queue->isEmpty()) {
-		connectionComponent->add(this->getVertex(queue->get(0))); // Add vertex to component
+	while (!queue->isEmpty()) {	
 		checked[queue->get(0)] = true; // mark as vievd
+		if (!connectionComponent->contains(vertexes->get(queue->get(0))))
+			connectionComponent->add(this->getVertex(queue->get(0))); // Add vertex to component
 		List<int>* vertexesEdges = findAllVertexesEdges(queue->get(0)); // Find all connected edges
 		AddUniqueEdges(connectionComponent->edges, vertexesEdges); // Add unique edges to component
 		for (int i = 0; i < vertexesEdges->size(); i++) { // Check edges for new connected vertexes and add to queue
 			if (!checked[vertexesEdges->get(i)]) {
 				checked[queue->get(0)] = true;
-
 				queue->pushBack(vertexesEdges->get(i));
 			}
 		}
 		queue->removeIndex(0);
 	}
 	return connectionComponent;
+};
+// Return amount of vertexes
+template<typename T>
+int  Graf<T>::vertexAmount() {
+	return vertexes->size();
+};
+template<typename T>
+int  Graf<T>::edgesAmount() {
+	return edges->size() / 2;
 };
