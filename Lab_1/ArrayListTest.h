@@ -42,7 +42,7 @@ public:
 			return;
 		if (!clearTest())
 			return;
-		microBenchmarking(10000);
+		microBenchmarking(10);
 		cout << endl << "ArrayList class testing complete successfuly:" << endl << endl;
 	}
 	bool isEmptyTest() {
@@ -358,7 +358,7 @@ public:
 			emptyArrayList->clear();
 		}
 		uint64_t endSec = std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now().time_since_epoch()).count();
-		cout << (double_t)endSec - (double_t)startSec <<" For "<< n << " cycles" << endl;
+		cout << (double_t)endSec - (double_t)startSec <<" seconds for "<< n << " cycles" << endl;
 	}
 };
 

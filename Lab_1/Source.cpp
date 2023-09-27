@@ -3,6 +3,7 @@
 #include "LinkedList.cpp"
 #include "ArrayListTest.h"
 #include "LinkedListTest.h"
+#include "GrafTest.h"
 using namespace std;
 int main() {
 	//List<int> *ar = new ArrayList<int>();
@@ -43,6 +44,8 @@ int main() {
 	arrayListTester->mainTest();
 	LinkedListTest* linkedListTester = new LinkedListTest();
 	linkedListTester->mainTest();
+	GrafTest* grafTester = new GrafTest();
+	grafTester->mainTest();
 	system("pause");
 	return 0;
 }

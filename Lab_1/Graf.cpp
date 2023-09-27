@@ -195,7 +195,7 @@ void Graf<T>::addEdges(int* arr, int size) {
 				edges->addAll(&arr[i], 2);
 		}
 	else
-		std::cout << " edge nomer more then maximum vertex nomer";
+		std::cout << "Edge nomer more then maximum vertex nomer. Edge can`t be added" <<std::endl;
 }
 // Remove vertex by index. Delete all edges with it. 0 if index out of borders.
 template<typename T>

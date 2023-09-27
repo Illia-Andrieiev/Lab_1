@@ -131,6 +131,7 @@
     <ClCompile Include="ArrayListTest.cpp" />
     <ClCompile Include="BaseGraf.cpp" />
     <ClCompile Include="Graf.cpp" />
+    <ClCompile Include="GrafTest.cpp" />
     <ClCompile Include="LinkedList.cpp" />
     <ClCompile Include="LinkedListTest.cpp" />
     <ClCompile Include="List.cpp" />
@@ -143,6 +144,7 @@
     <ClInclude Include="BaseGraf.h" />
     <ClInclude Include="BaseTree.h" />
     <ClInclude Include="Graf.h" />
+    <ClInclude Include="GrafTest.h" />
     <ClInclude Include="LinkedList.h" />
     <ClInclude Include="LinkedListTest.h" />
     <ClInclude Include="List.h" />
