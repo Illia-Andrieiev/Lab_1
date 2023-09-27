@@ -125,6 +125,8 @@ void ArrayList<T>::pushIndex(T element, int index) {
 // Add array of elements in the end of list
 template<typename T>
 void ArrayList<T>::addAll(T* arr, int size) {
+	if (size < 0)
+		return;
 	if ((arraySize - elementAmount) < size) {
 		extendArray(size);
 	}
@@ -135,6 +137,8 @@ void ArrayList<T>::addAll(T* arr, int size) {
 // Add other List of elements in the end of This list
 template<typename T>
 void ArrayList<T>::addAll(List<T>* other) {
+	if (other == nullptr)
+		return;
 	if ((arraySize - elementAmount) < other->size()) {
 		extendArray(other->size());
 	}

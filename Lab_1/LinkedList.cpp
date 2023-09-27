@@ -106,6 +106,8 @@ void LinkedList<T>::addAll(T* arr, int size) {
 // Add other List of elements in the end of This list
 template<typename T>
 void LinkedList<T>::addAll(List<T>* other) {
+	if (other == nullptr)
+		return;
 	for (int i = 0; i < other->size(); i++) {
 		pushBack(other->get(i));
 	}

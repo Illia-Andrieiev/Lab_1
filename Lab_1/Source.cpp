@@ -1,7 +1,8 @@
 #include "Graf.cpp"
-#include "Tree.cpp"
 #include "ArrayList.cpp"
+#include "LinkedList.cpp"
 #include "ArrayListTest.h"
+#include "LinkedListTest.h"
 using namespace std;
 int main() {
 	//List<int> *ar = new ArrayList<int>();
@@ -38,8 +39,10 @@ int main() {
 	////tree->print();
 	////cout << endl;
 	////ar->print();
-	ArrayListTest* test = new ArrayListTest();
-	test->mainTest();
+	ArrayListTest* arrayListTester = new ArrayListTest();
+	arrayListTester->mainTest();
+	LinkedListTest* linkedListTester = new LinkedListTest();
+	linkedListTester->mainTest();
 	system("pause");
 	return 0;
 }

@@ -2,20 +2,20 @@
 #include <iostream>
 #include <string>
 #include <chrono>
-#include"ArrayList.h"
+#include"LinkedList.h"
 using namespace std;
-class ArrayListTest
+class LinkedListTest
 {
 private:
-	List<int>* arrayList1 ;
-	List<string>* arrayList2;
+	List<int>* LinkedList1;
+	List<string>* LinkedList2;
 public:
-	ArrayListTest() {
-		arrayList1 = new ArrayList<int>();
-		arrayList2 = new ArrayList<string>();
+	LinkedListTest() {
+		LinkedList1 = new LinkedList<int>();
+		LinkedList2 = new LinkedList<string>();
 	}
 	void mainTest() {
-		cout << "Testing ArrayList class:" << endl << endl;
+		cout << "Testing LinkedList class:" << endl << endl;
 		if (!isEmptyTest())
 			return;
 		if (!sizeTest())
@@ -43,24 +43,24 @@ public:
 		if (!clearTest())
 			return;
 		microBenchmarking(10000);
-		cout << endl << "ArrayList class testing complete successfuly:" << endl << endl;
+		cout << endl <<"LinkedList class testing complete successfuly:" << endl << endl;
 	}
 	bool isEmptyTest() {
-		if (!arrayList1->isEmpty()) {
+		if (!LinkedList1->isEmpty()) {
 			cout << "isEmptyTest Failed 1" << endl;
 			return false;
 		}
-		if (!arrayList2->isEmpty()) {
+		if (!LinkedList2->isEmpty()) {
 			cout << "isEmptyTest Failed 2" << endl;
 			return false;
 		}
-		arrayList1->pushBack(0);
-		arrayList2->pushBack("first string");
-		if (arrayList1->isEmpty()) {
+		LinkedList1->pushBack(0);
+		LinkedList2->pushBack("first string");
+		if (LinkedList1->isEmpty()) {
 			cout << "isEmptyTest Failed 3" << endl;
 			return false;
 		}
-		if (arrayList2->isEmpty()) {
+		if (LinkedList2->isEmpty()) {
 			cout << "isEmptyTest Failed 4" << endl;
 			return false;
 		}
@@ -68,19 +68,19 @@ public:
 		return true;
 	}
 	bool sizeTest() {
-		ArrayList<int>* emptyArrayList = new ArrayList<int>();
-		if (emptyArrayList->size() != 0) {
+		LinkedList<int>* emptyLinkedList = new LinkedList<int>();
+		if (emptyLinkedList->size() != 0) {
 			cout << "sizeTest Failed 1" << endl;
 			return false;
 		}
-		if (arrayList1->size() != 1) {
+		if (LinkedList1->size() != 1) {
 			cout << "sizeTest Failed 2" << endl;
 			return false;
 		}
 		for (int i = 0; i < 41; i++) {
-			emptyArrayList->pushBack(i);
+			emptyLinkedList->pushBack(i);
 		}
-		if (emptyArrayList->size() != 41) {
+		if (emptyLinkedList->size() != 41) {
 			cout << "sizeTest Failed 3" << endl;
 			return false;
 		}
@@ -88,20 +88,20 @@ public:
 		return true;
 	}
 	bool pushBackTest() {
-		ArrayList<int>* emptyArrayList = new ArrayList<int>();
-		emptyArrayList->pushBack(4);
-		if (emptyArrayList->get(0) != 4) {
+		LinkedList<int>* emptyLinkedList = new LinkedList<int>();
+		emptyLinkedList->pushBack(4);
+		if (emptyLinkedList->get(0) != 4) {
 			cout << "pushBackTest Failed 1" << endl;
 			return false;
 		}
-		arrayList1->pushBack(1);
-		arrayList1->pushBack(2);
-		if (arrayList1->get(2) != 2) {
+		LinkedList1->pushBack(1);
+		LinkedList1->pushBack(2);
+		if (LinkedList1->get(2) != 2) {
 			cout << "pushBackTest Failed 2" << endl;
 			return false;
 		}
-		arrayList2->pushBack("second string");
-		if (!arrayList2->get(1)._Equal("second string")) {
+		LinkedList2->pushBack("second string");
+		if (!LinkedList2->get(1)._Equal("second string")) {
 			cout << "pushBackTest Failed 3" << endl;
 			return false;
 		}
@@ -109,19 +109,19 @@ public:
 		return true;
 	}
 	bool pushIndexTest() {
-		arrayList1->pushIndex(-1, 0);
-		if (arrayList1->get(0) != -1 && arrayList1->get(1) != 0) {
+		LinkedList1->pushIndex(-1, 0);
+		if (LinkedList1->get(0) != -1 && LinkedList1->get(1) != 0) {
 			cout << "pushIndexTest Failed 1" << endl;
 			return false;
 		}
-		arrayList1->pushIndex(99, 4);
-		if (arrayList1->get(4) != 99) {
+		LinkedList1->pushIndex(99, 4);
+		if (LinkedList1->get(4) != 99) {
 			cout << "pushIndexTest Failed 2" << endl;
 			return false;
 		}
-		arrayList2->pushIndex("insert string",1);
-		if (!arrayList2->get(1)._Equal("insert string") ||
-			!arrayList2->get(2)._Equal("second string")) {
+		LinkedList2->pushIndex("insert string", 1);
+		if (!LinkedList2->get(1)._Equal("insert string") ||
+			!LinkedList2->get(2)._Equal("second string")) {
 			cout << "pushBackTest Failed 3" << endl;
 			return false;
 		}
@@ -129,19 +129,19 @@ public:
 		return true;
 	}
 	bool indexOfTest() {
-		if (arrayList1->indexOf(313) != -1) {
+		if (LinkedList1->indexOf(313) != -1) {
 			cout << "indexOfTest Failed 1" << endl;
 			return false;
 		}
-		if (arrayList1->indexOf(-1) != 0) {
+		if (LinkedList1->indexOf(-1) != 0) {
 			cout << "indexOfTest Failed 2" << endl;
 			return false;
 		}
-		if (arrayList1->indexOf(99) != 4) {
+		if (LinkedList1->indexOf(99) != 4) {
 			cout << "indexOfTest Failed 3" << endl;
 			return false;
 		}
-		if (arrayList2->indexOf("second string") != 2) {
+		if (LinkedList2->indexOf("second string") != 2) {
 			cout << "indexOfTest Failed 4" << endl;
 			return false;
 		}
@@ -149,23 +149,23 @@ public:
 		return true;
 	}
 	bool containsTest() {
-		if (arrayList1->contains(3122)) {
+		if (LinkedList1->contains(3122)) {
 			cout << "containsTest Failed 1" << endl;
 			return false;
 		}
-		if (!arrayList1->contains(2)) {
+		if (!LinkedList1->contains(2)) {
 			cout << "containsTest Failed 2" << endl;
 			return false;
 		}
-		if (!arrayList1->contains(-1)) {
+		if (!LinkedList1->contains(-1)) {
 			cout << "containsTest Failed 3" << endl;
 			return false;
 		}
-		if (arrayList2->contains("")) {
+		if (LinkedList2->contains("")) {
 			cout << "containsTest Failed 4" << endl;
 			return false;
 		}
-		if (!arrayList2->contains("insert string")) {
+		if (!LinkedList2->contains("insert string")) {
 			cout << "containsTest Failed 5" << endl;
 			return false;
 		}
@@ -173,22 +173,22 @@ public:
 		return true;
 	}
 	bool addAllTest() {
-		List<int> *ar = new ArrayList<int>();
+		List<int>* ar = new LinkedList<int>();
 		ar->pushBack(2);
 		ar->pushBack(4);
 		ar->pushBack(6);
 		ar->pushBack(8);
-		int size1 = arrayList1->size();
-		ar->addAll(arrayList1);
-		if (ar->size() != 4 + size1){
+		int size1 = LinkedList1->size();
+		ar->addAll(LinkedList1);
+		if (ar->size() != 4 + size1) {
 			cout << "addAllTest Failed 1" << endl;
 			return false;
 		}
-		if (ar->get(4) != arrayList1->get(0)) {
+		if (ar->get(4) != LinkedList1->get(0)) {
 			cout << "addAllTest Failed 2" << endl;
 			return false;
 		}
-		if (ar->get(3 + size1) != arrayList1->get(size1-1)) {
+		if (ar->get(3 + size1) != LinkedList1->get(size1 - 1)) {
 			cout << "addAllTest Failed 3" << endl;
 			return false;
 		}
@@ -206,23 +206,23 @@ public:
 		return true;
 	}
 	bool setTest() {
-		arrayList1->set(10, 0);
-		if (arrayList1->get(0) != 10) {
+		LinkedList1->set(10, 0);
+		if (LinkedList1->get(0) != 10) {
 			cout << "setTest Failed 1" << endl;
 			return false;
 		}
-		arrayList1->set(13, 3);
-		if (arrayList1->get(3) != 13) {
+		LinkedList1->set(13, 3);
+		if (LinkedList1->get(3) != 13) {
 			cout << "setTest Failed 2" << endl;
 			return false;
 		}
-		arrayList2->set("eee111", 2);
-		if (!arrayList2->get(2)._Equal("eee111")) {
+		LinkedList2->set("eee111", 2);
+		if (!LinkedList2->get(2)._Equal("eee111")) {
 			cout << "setTest Failed 3" << endl;
 			return false;
 		}
 		try {
-			arrayList2->set("eee1", 211);
+			LinkedList2->set("eee1", 211);
 		}
 		catch (out_of_range e) {
 			cout << "setTest Failed 4" << endl;
@@ -232,7 +232,7 @@ public:
 		return true;
 	}
 	bool getTest() {
-		List<int>* ar = new ArrayList<int>();
+		List<int>* ar = new LinkedList<int>();
 		ar->pushBack(2);
 		ar->pushBack(4);
 		ar->pushBack(6);
@@ -245,7 +245,7 @@ public:
 			cout << "getTest Failed 2" << endl;
 			return false;
 		}
-		if (!arrayList2->get(2)._Equal("eee111")) {
+		if (!LinkedList2->get(2)._Equal("eee111")) {
 			cout << "getTest Failed 3" << endl;
 			return false;
 		}
@@ -253,7 +253,7 @@ public:
 		return true;
 	}
 	bool removeIndexTest() {
-		List<int>* ar = new ArrayList<int>();
+		List<int>* ar = new LinkedList<int>();
 		ar->pushBack(2);
 		ar->pushBack(4);
 		ar->pushBack(6);
@@ -266,8 +266,8 @@ public:
 			cout << "removeIndexTest Failed 2" << endl;
 			return false;
 		}
-		if (!arrayList2->removeIndex(1)._Equal("insert string") ||
-			!arrayList2->get(1)._Equal("eee111")) {
+		if (!LinkedList2->removeIndex(1)._Equal("insert string") ||
+			!LinkedList2->get(1)._Equal("eee111")) {
 			cout << "removeIndexTest Failed 3" << endl;
 			return false;
 		}
@@ -275,12 +275,12 @@ public:
 		return true;
 	}
 	bool removeElemTest() {
-		List<int>* ar = new ArrayList<int>();
+		List<int>* ar = new LinkedList<int>();
 		ar->pushBack(2);
 		ar->pushBack(4);
 		ar->pushBack(6);
 		ar->pushBack(8);
-		List<string>* strar = new ArrayList<string>();
+		List<string>* strar = new LinkedList<string>();
 		strar->pushBack("ffff");
 		strar->pushBack("insert string");
 		strar->pushBack("eee111");
@@ -303,24 +303,24 @@ public:
 		return true;
 	}
 	bool cloneTest() {
-		List<int>* intClone = arrayList1->clone();
-		List<string>* strClone = arrayList2->clone();
-		if (intClone->size() != arrayList1->size()) {
+		List<int>* intClone = LinkedList1->clone();
+		List<string>* strClone = LinkedList2->clone();
+		if (intClone->size() != LinkedList1->size()) {
 			cout << "cloneTest Failed 1" << endl;
 			return false;
 		}
-		if (strClone->size() != arrayList2->size()) {
+		if (strClone->size() != LinkedList2->size()) {
 			cout << "cloneTest Failed 2" << endl;
 			return false;
 		}
-		for (int i = 0; i < arrayList1->size(); i++) {
-			if (intClone->get(i) != arrayList1->get(i)) {
+		for (int i = 0; i < LinkedList1->size(); i++) {
+			if (intClone->get(i) != LinkedList1->get(i)) {
 				cout << "cloneTest Failed 1" << endl;
 				return false;
 			}
 		}
-		for (int i = 0; i < arrayList2->size(); i++) {
-			if (!strClone->get(i)._Equal(arrayList2->get(i))) {
+		for (int i = 0; i < LinkedList2->size(); i++) {
+			if (!strClone->get(i)._Equal(LinkedList2->get(i))) {
 				cout << "cloneTest Failed 2" << endl;
 				return false;
 			}
@@ -329,19 +329,19 @@ public:
 		return true;
 	}
 	bool clearTest() {
-		ArrayList<int>* emptyArrayList = new ArrayList<int>();
-		emptyArrayList->clear();
-		arrayList1->clear();
-		arrayList2->clear();
-		if (arrayList1->size() != 0) {
+		LinkedList<int>* emptyLinkedList = new LinkedList<int>();
+		emptyLinkedList->clear();
+		LinkedList1->clear();
+		LinkedList2->clear();
+		if (LinkedList1->size() != 0) {
 			cout << "clearTest Failed 1" << endl;
 			return false;
 		}
-		if (arrayList2->size() != 0) {
+		if (LinkedList2->size() != 0) {
 			cout << "clearTest Failed 2" << endl;
 			return false;
 		}
-		if (emptyArrayList->size() != 0) {
+		if (emptyLinkedList->size() != 0) {
 			cout << "clearTest Failed 3" << endl;
 			return false;
 		}
@@ -351,14 +351,13 @@ public:
 	void microBenchmarking(int n) {
 		uint64_t startSec = std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 		for (int i = 0; i < n; i++) {
-			ArrayList<int>* emptyArrayList = new ArrayList<int>();
+			LinkedList<int>* emptyArrayList = new LinkedList<int>();
 			for (int i = 0; i < 20000; i++) {
 				emptyArrayList->pushBack(i);
 			}
 			emptyArrayList->clear();
 		}
 		uint64_t endSec = std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now().time_since_epoch()).count();
-		cout << (double_t)endSec - (double_t)startSec <<" For "<< n << " cycles" << endl;
+		cout << (double_t)endSec - (double_t)startSec << " For " << n << " cycles" << endl;
 	}
 };
-
