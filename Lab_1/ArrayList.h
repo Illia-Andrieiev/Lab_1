@@ -30,5 +30,6 @@ public:
 	T removeIndex(int index);
 	T removeElem(T element);
 	T get(int index);
-	List<T>* clone();
+
+	ArrayList<T>* clone();
 };

@@ -174,7 +174,8 @@ T ArrayList<T>::removeIndex(int index) {
 	for (int i = index; i < elementAmount - 1; i++) { // Shift array elements
 		array[i] = array[i + 1];
 	}
-	array[--elementAmount] = 0;
+	--elementAmount;
+	//array[--elementAmount] = 0;
 	if (arraySize - elementAmount > 20)
 		reduceArray();
 	return res;
@@ -193,8 +194,8 @@ T ArrayList<T>::get(int index) {
 }
 // Return copy of this list
 template<typename T>
-List<T>* ArrayList<T>::clone() {
-	List<T>* res = new ArrayList<T>();
+ArrayList<T>* ArrayList<T>::clone(){
+	ArrayList<T>* res = new ArrayList<T>();
 	res->addAll(this);
 	return res;
 };
