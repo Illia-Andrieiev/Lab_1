@@ -19,7 +19,6 @@ bool Graf<T>::isConnectedWhileAdd(List<int>* edges, int start, int end) {
 		while (!queue->isEmpty()) {
 			checked[queue->get(0)] = true;
 			List<int>* adjacent = adjacentVertexes(edges, queue->get(0)); 
-			adjacent->print();
 			// Adjecent vertexs
 			if (adjacent->contains(end)) {
 				queue->clear();
@@ -314,16 +313,17 @@ template<typename T>
 int  Graf<T>::edgesAmount() {
 	return edges->size() / 2;
 };
+// Return List of vertexes
 template<typename T>
-List<T>* Graf<T>::getVertexes() {
+List<T>* Graf<T>::getVertexList() {
 	return vertexes;
 };
 // Return Ost tree for graf
 template<typename T>
 Graf<T>* Graf<T>::findOstTreeForGraf(Graf<T>* graf) {
-	Graf<T>* ostTree = new Graf<T>(graf->getVertex());
+	Graf<T>* ostTree = new Graf<T>(graf->getVertexList());
 	for (int i = 0; i < graf->edges->size(); i += 2) {
-		if (!isConnectedWhileAdd(graf->edges,
+		if (!isConnectedWhileAdd(ostTree->edges,
 			graf->edges->get(i), graf->edges->get(i + 1))) {
 			int edge[] = { graf->edges->get(i), graf->edges->get(i + 1) };
 			ostTree->addEdges(edge, 2);

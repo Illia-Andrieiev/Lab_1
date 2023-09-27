@@ -27,7 +27,7 @@ public:
 	Graf(T* vertex,int sizeV, int* edges, int sizeE);
 	Graf(List<T>* vertex, int* edges, int sizeE);
 	~Graf();
-	List<T>* getVertexes();
+	List<T>* getVertexList();
 	int vertexAmount();
 	int edgesAmount();
 	void add(T element);
