@@ -20,6 +20,7 @@ private:
 	bool isConnectedWhileAdd(List<int>* edges, int first, int second);
 	List<int>* adjacentVertexes(List<int>* edges, int nomer);
 	Graf<T>* findOstTreeForGraf(Graf<T>* graf);
+	void fixEdgesInComponent(Graf<T>* component);
 public:
 	Graf();
 	Graf(T* vertex, int size);

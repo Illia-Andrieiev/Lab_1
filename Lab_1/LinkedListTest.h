@@ -42,7 +42,7 @@ public:
 			return;
 		if (!clearTest())
 			return;
-		microBenchmarking(10);
+		microBenchmarking(1000);
 		cout << endl <<"LinkedList class testing complete successfuly:" << endl << endl;
 	}
 	bool isEmptyTest() {

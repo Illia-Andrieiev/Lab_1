@@ -78,6 +78,16 @@ bool Graf<T>::isContainEdge(List<int>* edges, int* edge){
 	}
 	return false;
 }
+// Fix edge nomers in connection component; 
+template<typename T>
+void Graf<T>::fixEdgesInComponent(Graf<T>* component) {
+	for (int i = 0; i < component->edges->size(); i += 2) {
+		T vertex1 = this->getVertex(component->edges->get(i));
+		T vertex2 = this->getVertex(component->edges->get(i+1));
+		component->edges->set(component->vertexes->indexOf(vertex1), i);
+		component->edges->set(component->vertexes->indexOf(vertex2), i + 1);
+	}
+}
 // Add in first list unique edges from second list
 template<typename T>
 void Graf<T>::AddUniqueEdges(List<int>* old, List<int>* newEdges) {
@@ -218,7 +228,7 @@ int  Graf<T>::nomerOfVertex(T element) {
 // Remove some edges
 template<typename T>
 void Graf<T>::removeEdges(int* edges, int size) {
-	if (size % 2 != 0 || size < 2 || size > vertexes->size())
+	if (size % 2 != 0 || size < 2 || size > vertexes->size() * 2)
 		return;
 	for (int i = 0; i < size; i += 2)
 		deleteOneEdge(&edges[i]);
@@ -263,7 +273,7 @@ template<typename T>
 bool  Graf<T>::isConnectedVertex(int first, int second) {
 	return isConnectedWhileAdd(edges, first, second);
 }
-// Find all connection components for graf
+// Find all connection components for graf. Return nullptr if graf isEmpty
 template<typename T>
 List<Graf<T>*>* Graf<T>::findConnectionComponent() {
 	if (vertexes->size() == 0)
@@ -301,6 +311,7 @@ Graf<T>* Graf<T>::findConnectionComponentForVertex(int nomer, bool* checked) {
 		}
 		queue->removeIndex(0);
 	}
+	fixEdgesInComponent(connectionComponent);
 	return connectionComponent;
 };
 // Return amount of vertexes
@@ -318,9 +329,11 @@ template<typename T>
 List<T>* Graf<T>::getVertexList() {
 	return vertexes;
 };
-// Return Ost tree for graf
+// Return Ost tree for graf. Return nullptr if graf isEmpty
 template<typename T>
 Graf<T>* Graf<T>::findOstTreeForGraf(Graf<T>* graf) {
+	if (graf->vertexAmount() == 0)
+		return nullptr;
 	Graf<T>* ostTree = new Graf<T>(graf->getVertexList());
 	for (int i = 0; i < graf->edges->size(); i += 2) {
 		if (!isConnectedWhileAdd(ostTree->edges,
@@ -339,9 +352,8 @@ Graf<T>* Graf<T>::findOstTree() {
 // Return Ost Forest for this graf.(Find Ost tree for each connect component)
 template<typename T>
 List<Graf<T>*>* Graf<T>::findOstForest() {
-	List<Graf<T>*>* connectComponents = findConnectionComponent();
-	List<Graf<T>*>* ostForest = new ArrayList<Graf<T>*>();
-	for (int i = 0; i < connectComponents->size(); i++) 
-		ostForest->pushBack(findOstTreeForGraf(connectComponents->get(i)));
+	Graf<T>* ostTree = findOstTree();
+	List<Graf<T>*>* ostForest = new ArrayList<Graf<T>*>(); 
+	ostForest = ostTree->findConnectionComponent();
 	return ostForest;
 }
