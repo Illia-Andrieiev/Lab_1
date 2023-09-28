@@ -173,7 +173,7 @@ void ArrayList<T>::print() {
 template<typename T>
 T ArrayList<T>::removeIndex(int index) {
 	if (index < 0 || index >= elementAmount)
-		return 0;
+		return NULL;
 	T res = array[index];
 	for (int i = index; i < elementAmount - 1; i++) { // Shift array elements
 		array[i] = array[i + 1];

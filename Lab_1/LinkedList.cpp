@@ -127,7 +127,7 @@ void LinkedList<T>::set(T element, int index) {
 template<typename T>
 T LinkedList<T>::removeIndex(int index) {
 	if (index < 0 || index >= elementAmount)
-		return 0;
+		return NULL;
 	if (index == 0) {
 		ListNode<T>* res = head;
 		head = head->next;
@@ -154,7 +154,7 @@ T LinkedList<T>::removeElem(T element) {
 template<typename T>
 T LinkedList<T>::get(int index) {
 	if (index < 0 || index >= elementAmount)
-		return 0;
+		return NULL;
 	ListNode<T>* curr = head;
 	for (int i = 0; i < index; i++) {
 		curr = curr->next;
