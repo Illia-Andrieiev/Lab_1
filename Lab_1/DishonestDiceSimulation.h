@@ -21,5 +21,6 @@ public:
 	void printDices();
 	void printSummProbabilitiesInFile(std::string fileName);
 	List<long double>* summProbabilities();
+	std::string toString();
 };
 

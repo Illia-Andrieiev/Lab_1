@@ -169,6 +169,7 @@ List<long double>* DishonestDiceSimulation::summProbabilities() {
 	computeSumms(res, 0, 0, 1);
 	return res;
 }
+// Print summ in file
 void DishonestDiceSimulation::printSummProbabilitiesInFile(std::string fileName) {
 	std::ofstream file;
 	file.open(fileName);
@@ -183,4 +184,15 @@ void DishonestDiceSimulation::printSummProbabilitiesInFile(std::string fileName)
 		}
 	}
 	file.close();
+}
+//Return summ result ass string
+std::string DishonestDiceSimulation::toString() {
+	std::string res = "";
+	List<long double>* summ = summProbabilities();
+	for (int i = 0; i < summ->size(); i++) {
+		if (summ->get(i) != 0)
+			res = res + "Probability to get " + std::to_string(i) + " in summ is: "
+			+ std::to_string(summ->get(i)) + "\n";
+	}
+	return res;
 }

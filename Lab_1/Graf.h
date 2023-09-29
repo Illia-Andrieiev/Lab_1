@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 #include "BaseGraf.h"
 #include"List.h"
 /*
@@ -47,6 +48,6 @@ public:
 	List<Graf<T>*>* findConnectionComponent();
 	Graf<T>* findOstTree();
 	List<Graf<T>*>* findOstForest();
-
+	std::string toString();
 };
 

@@ -357,3 +357,14 @@ List<Graf<T>*>* Graf<T>::findOstForest() {
 	ostForest = ostTree->findConnectionComponent();
 	return ostForest;
 }
+template<typename T>
+std::string Graf<T>::toString() {
+	std::string res = "vertexes:\n";
+	for (int i = 0; i < vertexes->size(); i++)
+		res = res + std::to_string(vertexes->get(i)) + ", ";
+	res = res + "\n" + "edges:\n";
+	for (int i = 0; i < edges->size(); i += 2) {
+		res = res + std::to_string(edges->get(i)) + ","
+			+ std::to_string(edges->get(i + 1)) + ";";
+	}	
+};
