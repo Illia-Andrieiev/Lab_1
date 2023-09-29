@@ -65,6 +65,13 @@ long double DishonestDiceSimulation::wordToNumber(std::string word, bool* isCorr
 	return res;
 }
 // Create simulation reading file
+/*
+	File must store data in next format: 
+	(amount_of_dice_edges [probability for each edge nomers starts from 1 to amount_of_dice_edges ]*)*
+	 - * mean iteration of expression. For example 3 0.5 0.2 0.3 2 0.5 0.5 data mean:
+	 Dice1: probability to get 1 = 0.5, to get 2 = 0.2, to get 3 = 0.3
+	 Dice2: probability to get 1 = 0.5, to get 2 = 0.5.
+*/
 void  DishonestDiceSimulation::createSimulationFromFile(std::string fileName) {
 	std::ifstream file;
 	file.open(fileName);
