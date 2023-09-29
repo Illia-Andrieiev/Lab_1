@@ -138,6 +138,7 @@
     <ClCompile Include="LinkedListTest.cpp" />
     <ClCompile Include="List.cpp" />
     <ClCompile Include="ListNode.cpp" />
+    <ClCompile Include="SimulationBenchmarking.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -153,6 +154,7 @@
     <ClInclude Include="LinkedListTest.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="ListNode.h" />
+    <ClInclude Include="SimulationBenchmarking.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -6,6 +6,7 @@
 #include "GrafTest.h"
 #include "Dice.h"
 #include "DishonestDiceSimulation.h"
+#include"SimulationBenchmarking.h"
 using namespace std;
 int main() {
 	ArrayListTest* arrayListTester = new ArrayListTest();
@@ -16,6 +17,9 @@ int main() {
 	cout << "*******************************************************" << endl;
 	GrafTest* grafTester = new GrafTest();
 	grafTester->mainTest();
+	cout << "*******************************************************" << endl;
+	SimulationBenchmarking* simulationBench = new SimulationBenchmarking();
+	simulationBench->microBenchmarking(100000);
 	cout << "*******************************************************" << endl;
 	//******************************************************************
 
