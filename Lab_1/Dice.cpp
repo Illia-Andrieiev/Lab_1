@@ -13,7 +13,8 @@ Dice::Dice(long double* probabilities, int size) {
 	}
 }
 Dice::Dice(List<long double>* list) {
-	this->probabilities = list;
+	List<long double>* newList = list->clone();
+	this->probabilities = newList;
 }
 // Return list Probabilities
 List<long double>* Dice::getProbabilities() {

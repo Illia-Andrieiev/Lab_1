@@ -8,12 +8,17 @@
 #include "DishonestDiceSimulation.h"
 using namespace std;
 int main() {
-	//ArrayListTest* arrayListTester = new ArrayListTest();
-	//arrayListTester->mainTest();
-	//LinkedListTest* linkedListTester = new LinkedListTest();
-	//linkedListTester->mainTest();
-	//GrafTest* grafTester = new GrafTest();
-	//grafTester->mainTest();
+	ArrayListTest* arrayListTester = new ArrayListTest();
+	arrayListTester->mainTest();
+	cout << "*******************************************************" << endl;
+	LinkedListTest* linkedListTester = new LinkedListTest();
+	linkedListTester->mainTest();
+	cout << "*******************************************************" << endl;
+	GrafTest* grafTester = new GrafTest();
+	grafTester->mainTest();
+	cout << "*******************************************************" << endl;
+	//******************************************************************
+
 	long double coin[] = { 0.5,0.5 };
 	long double dishonest[] = { 0.1,0.4,0.5 };
 	long double cube[] = { 0.166666,0.166666,0.166666,0.166666,0.166666,0.166666, };
@@ -36,10 +41,6 @@ int main() {
 	simulation2->addDice(cube3);
 	simulation2->addDice(unHon);
 	simulation2->addDice(unHon);
-	simulation2->addDice(unHon);
-	simulation2->addDice(unHon);
-	simulation2->addDice(coin1);
-	simulation2->addDice(cube3);
 	simulation2->addDice(coin1);
 	simulation2->addDice(coin1);
 	simulation2->addDice(coin2);
@@ -49,11 +50,6 @@ int main() {
 	cout << "*******************************************************" << endl;
 	List<long double>* summ2 = simulation2->summProbabilities();
 	summ2->print();
-	long double res = 0;
-	for (int i = 0; i < summ2->size(); i++) {
-		res += summ2->get(i);
-	}
-	cout << endl << res;
 	system("pause");
 	return 0;
 }
